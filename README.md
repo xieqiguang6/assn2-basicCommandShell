@@ -93,7 +93,7 @@ You should verify these commands work for your repository on hammer.cs.ucr.edu t
 |5 pts|well commented code|
 |5 pts|following style guidelines (see wiki)|
 |10 pts|sufficient test cases|
-|10 pts|udpated design document|
+|10 pts|updated design document|
 |20 pts|executing single commands|
 |20 pts|executing commands with connectors|
 |20 pts|executing commands with comments|
