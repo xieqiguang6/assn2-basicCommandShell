@@ -21,7 +21,7 @@ is equivalent to:
 ```bash
 $ ls -a; echo hello; mkdir test
 ```
-You are required to represent the commands and operators in your program as a composite pattern. There should be no limit to the number of commands that can be chained together using the operators, and your program must be able to handle any combination of operators. For example, you should be able to handle the command:
+You are required to represent the commands and operators in your program as a **composite pattern**. There should be no limit to the number of commands that can be chained together using the operators, and your program must be able to handle any combination of operators. For example, you should be able to handle the command:
 ```bash
 $ ls -a; echo hello && mkdir test || echo world; git status
 ```
