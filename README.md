@@ -57,6 +57,8 @@ Each of these files should contain multiple commands in order to fully test each
 
 **IMPORTANT:** The file/directory names above are a standard convention. You must use the exact same names in your project, including capitalization.
 
+You must also update your design document from Assignment 1 to match your implementation for this assignment. Keeping up to date documentation is one of the most important (and most overlooked) parts of writing software.
+
 ##Submission Instructions
 Your code must not generate any warnings on compilation.
 
@@ -90,7 +92,8 @@ You should verify these commands work for your repository on hammer.cs.ucr.edu t
 |:---:|:---|
 |5 pts|well commented code|
 |5 pts|following style guidelines (see wiki)|
-|20 pts|sufficient test cases|
+|10 pts|sufficient test cases|
+|10 pts|udpated design document|
 |20 pts|executing single commands|
 |20 pts|executing commands with connectors|
 |20 pts|executing commands with comments|
