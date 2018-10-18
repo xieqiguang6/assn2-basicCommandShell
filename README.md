@@ -3,15 +3,18 @@
 **This project *must* be done in a group of two**
 
 ## Coding Requirements
-Write a command shell called rshell in C++. Your shell will perform the following steps: 
-1. Print a command prompt (e.g. $)
-2. Read in a command on one line. Commands will have the form:
+Write a command shell called rshell in C++. Your shell will perform the following steps:
 
-cmd = executable [ argumentList] [connector cmd]
+1. Print a command prompt (e.g. `$`)
+2. Read in a line of commands from standard input
 
-connector = || or && or ;
+Commands will have the following format:
 
-where executable is an executable program in the PATH and argumentList is a list of zero or more arguments separated by spaces. The connector is an optional way you can run multiple commands at once. If a command is followed by ;, then the next command is always executed; if a command is followed by &&, then the next command is executed only if the first one succeeds; if a command is followed by ||, then the next command is executed only if the first one fails. For example:
+```
+$ executable [argumentList] [connector] [cmd] ...
+```
+
+Where there can be any number of commands seperated by either `||`, `&&`, or `;` which are the only valid connectors and the executable is an executable program located at one of the PATH environmental variable locations (and argumentList is a list of zero or more arguments separated by spaces). The connector is an optional way you can run multiple commands at once. If a command is followed by `;`, then the next command is always executed; if a command is followed by `&&`, then the next command is executed only if the first one succeeds; if a command is followed by `||`, then the next command is executed only if the first one fails. For example:
 
 ```bash
 $ ls -a
@@ -32,21 +35,17 @@ $ ls -a; echo hello && mkdir test || echo world; git status
 ```
 
 1. Execute the command. This will require using the syscalls fork, execvp, and waitpid. Previous cs100 students created two video tutorials ([a fun cartoon tutorial](https://www.youtube.com/watch?v=2c4ow5RoKA8&feature=youtu.be) ; [more serious explanation](https://www.youtube.com/watch?v=xVSPv-9x3gk)). You should also refer to the man pages for detailed instructions.
-2. You must have a special built-in command of exit which exits your shell.
-3. Anything that appears after a # character should be considered a comment. For example, in the command ls -lR /, you would execute the program /bin/ls passing into it the parameters -lR and /. But in the command ls # -lR /, you would execute /bin/ls, but you would not pass any parameters because they appear in the comment section. You should also note that the # may or may not be followed by a space before the comment begins
+2. You must have a special built-in command of `exit` which exits your shell.
+3. Anything that appears after a `#` character should be considered a comment. For example, in the command `ls -lR /`, you would execute the program `/bin/ls` passing into it the parameters `-lR` and `/`. But in the command `ls # -lR /`, you would execute `/bin/ls`, but you would not pass any parameters because they appear in the comment section. You should also note that the `#` may or may not be followed by a space before the comment begins
 
-**IMPORTANT:** Most bash commands are actually executables located in /bin, /usr/bin/ (e.g. ls). But some commands are built-in to bash (e.g. cd). So while the ls command should "just work" in your shell, the cd command won't.
+**IMPORTANT:** Most bash commands are actually executables located in `/bin`, `/usr/bin/` (e.g. `ls`). But some commands are built-in to bash (e.g. `cd`). So while the `ls` command should "just work" in your shell, the `cd` command won't.
 
 **HINT:** Pay careful attention to how you parse the command string the user enters. There are many ways to mess this up and introduce bugs into your program. You will be adding more parsing features in future assignments, so it will make your life much easier if you do it right the first time! I recommend using either the strtok function from the C standard libraries or the Tokenizer class provided in the boost library. Students often don't do this section of the assignment well and end up having to redo all of this assignment in order to complete the future assignments.
 
 ## Project Structure
-You must have a directory called src which contains all the source files for the project, additionally you may either have a folder header which contains your header files or you may keep them in the src directory.
+You must have a directory called `src/` which contains all the source files for the project, additionally you may either have a folder `header/` which contains your header files or you may keep them in the `src/` directory.
 
-You must have a Makefile in the root directory. In the Makefile you will have two targets. The first target is called all and the second target is called rshell. Both of these targets will compile your program using g++ with the flags: -Wall -Werror -ansi -pedantic.
-
-You must NOT have a directory called bin in the project; however, when the project is built, this directory must be created and all executable files placed here.
-
-You must have a LICENSE file in your project. You may select any open source license. I recommend either GPL or BSD3.
+Your root directory must have a CMakeLists.txt with two targest. The first target should be named `rshell` and should build the main executable and the second should be `test` which runs the unit tests that you have created using the Google Unit Test framework. 
 
 You must have a README.md file. This file should briefly summarize your project. In particular, it must include a list of known bugs. If you do not have any known bugs, then you probably have not sufficiently tested your code! [Read this short intro](https://robots.thoughtbot.com/how-to-write-a-great-readme) to writing README files to help you. You must use the Markdown formatting language when writing your README.
 
@@ -63,14 +62,10 @@ Each of these files should contain multiple commands in order to fully test each
 
 **IMPORTANT:** The file/directory names above are a standard convention. You must use the exact same names in your project, including capitalization.
 
-You must also update your design document from Assignment 1 to match your implementation for this assignment. Keeping up to date documentation is one of the most important (and most overlooked) parts of writing software.
+You must also update your design document from Assignment 1 to match your implementation for this assignment. Keeping up to date documentation is one of the most ignored parts of writing software.
 
 ## Submission Instructions
-Your code must not generate any warnings on compilation.
-
-You must follow the [CalTech coding guidelines](http://courses.cms.caltech.edu/cs11/material/cpp/donnie/cppstyle.html), as stated in the syllabus.
-
-Your final executable must have no memory leaks.
+You must follow the [CalTech coding guidelines](http://courses.cms.caltech.edu/cs11/material/cpp/donnie/cppstyle.html), and your final executable should have no memory leaks.
 
 Every time you run a syscall, you must check for an error condition. If an error occurs, then call perror. For every syscall you use that is not error checked, you will receive an automatic -5 points. For examples on when, how, and why to use perror, see [this video tutorial](https://izbicki.me/blog/videoguide-for-github-vim-bash.html#perror).
 
@@ -83,8 +78,6 @@ You MAY discuss with other students in general terms how to use the unix functio
 You are ENCOURAGED to talk with other students about test cases. You are allowed to freely share ideas in this regard.
 
 You are ENCOURAGED to look at [bash's source code](https://www.gnu.org/software/bash/) for inspiration.
-
-Create a new project on Github called rshell. Create a branch called exec. Do all of your work under this branch. When finished, merge the exec branch into the master branch, and create a tag called hw2. Remember that tags and branches in git are case sensitive!
 
 **NOTE:** git push will not automatically push tags to your repository. Use git push origin hw2 to update your repository to include the hw2 tag.
 
