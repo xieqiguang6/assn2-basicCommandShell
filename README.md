@@ -74,7 +74,7 @@ Your final executable must have no memory leaks.
 
 Every time you run a syscall, you must check for an error condition. If an error occurs, then call perror. For every syscall you use that is not error checked, you will receive an automatic -5 points. For examples on when, how, and why to use perror, see [this video tutorial](https://izbicki.me/blog/videoguide-for-github-vim-bash.html#perror).
 
-## #Collaboration Policy
+### Collaboration Policy
 
 You MAY NOT look at the source code of any other student.
 
