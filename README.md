@@ -1,4 +1,4 @@
-# Assignment 2 -- Writing a Basic Command Shell
+# Assignment 2: Writing a Basic Command Shell
 
 **This project *must* be done in a group of two**
 
